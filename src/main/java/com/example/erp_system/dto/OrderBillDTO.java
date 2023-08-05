@@ -1,5 +1,6 @@
 package com.example.erp_system.dto;
 
+import com.example.erp_system.entity.CustomerOrderEntity;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Data
 public class OrderBillDTO {
     private UUID uuid;
-    private CustomerOrderDTO order;
+    private CustomerOrderEntity order;
     private BigDecimal totalPrice;
 
     public OrderBillDTO() {
