@@ -41,9 +41,9 @@ public class KdvController {
 
     @Modifying
     @Transactional
-    @DeleteMapping("delete/{uuid}")
+    @DeleteMapping("delete_kdv/{uuid}")
     public ResponseEntity<Boolean> deleteKdvByUuid(@PathVariable UUID uuid) {
-        return new ResponseEntity<>(kdvService.Kdvdeletion(uuid), HttpStatus.OK);
+        return new ResponseEntity<>(kdvService.kdvDeletion(uuid), HttpStatus.OK);
     }
 
     @PostMapping("create")

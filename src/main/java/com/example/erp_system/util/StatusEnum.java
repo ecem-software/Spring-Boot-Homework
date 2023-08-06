@@ -1,5 +1,5 @@
 package com.example.erp_system.util;
-
+// Status Enums are created.
 public enum StatusEnum {
     APPROVED,
     WAITING,

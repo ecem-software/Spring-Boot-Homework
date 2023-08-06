@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +41,7 @@ public class ProductController {
 
     @Modifying
     @Transactional
-    @DeleteMapping("delete/{uuid}")
+    @DeleteMapping("delete_product/{uuid}")
     public ResponseEntity<Boolean> deleteByUuid(@PathVariable UUID uuid) {
         return new ResponseEntity<>(productService.productDeletion(uuid), HttpStatus.OK);
     }

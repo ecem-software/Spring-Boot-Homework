@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,7 +33,7 @@ public class ProductService {
             productEntity.setIsKdvApplied(isKdvApplied);
             productEntity.setOrderCount(1);
             productEntity.setKdv(kdvRepository.findByUuid(kdv.getUuid()));
-            kdvCorrectPrice(productEntity);
+            isKdvCorrectPrice(productEntity);
             productRepository.save(productEntity);
             return true;
         }
@@ -73,28 +74,28 @@ public class ProductService {
                 existingProduct.setKdv(productEntity.getKdv());
                 existingProduct.setNonKdvAppliedPrice(productEntity.getNonKdvAppliedPrice());
                 existingProduct.setIsKdvApplied(productEntity.getIsKdvApplied());
-                kdvCorrectPrice(existingProduct);
+                isKdvCorrectPrice(existingProduct);
                 productRepository.save(existingProduct);
                 return true;
             }
         }
 
-        }
-
-      public void kdvCorrectPrice(ProductEntity product){
-        BigDecimal kdv= product.getKdv().getPercent();
-        BigDecimal price= product.getProductPrice();
-        if(!product.getIsKdvApplied()){
+    }
+    public void isKdvCorrectPrice(ProductEntity product) {
+        BigDecimal kdv = product.getKdv().getPercent();
+        BigDecimal price = product.getProductPrice();
+        BigDecimal totalPrice;
+        BigDecimal kdvPrice;
+        if (!product.getIsKdvApplied()) {
             product.setNonKdvAppliedPrice(price);
-            BigDecimal kdvPrice= (price.multiply(kdv).divide(new BigDecimal(100)));
-            BigDecimal totalPrice=price.add(kdvPrice);
+            kdvPrice = (price.multiply(kdv)).divide(new BigDecimal(100), MathContext.DECIMAL32);
+            totalPrice = price.add(kdvPrice);
             product.setProductPrice(totalPrice);
-        }else{
-            BigDecimal kdvPrice= price.multiply((kdv.divide(BigDecimal.valueOf(100))));
-            BigDecimal nonKdvPrice= price.subtract(kdvPrice);
+        } else {
+            totalPrice = price;
+            BigDecimal nonKdvPrice = (totalPrice.multiply(new BigDecimal(100))).divide((new BigDecimal(100)).add(kdv), MathContext.DECIMAL32);
             product.setNonKdvAppliedPrice(nonKdvPrice);
         }
-      }
-
+    }
 
 }

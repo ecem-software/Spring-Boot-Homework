@@ -48,7 +48,7 @@ public class KdvService {
         }
     }
 
-    public boolean Kdvdeletion(UUID uuid) {
+    public boolean kdvDeletion(UUID uuid) {
         if (uuid == null) {
             return false;
         } else {
