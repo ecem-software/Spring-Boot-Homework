@@ -21,7 +21,7 @@ public class CustomerOrderService {
     ProductRepository productRepository;
     @Autowired
     ProductService productService;
-
+// Create method is made.
     public boolean createCustomerOrder(CustomerEntity customer, List<ProductEntity> productEntityList) {
         if (customer == null || productEntityList == null) {
             return false;
@@ -56,7 +56,7 @@ public class CustomerOrderService {
             return true;
         }
     }
-
+//product is added to customer order with this method.
     public boolean addProductToCustomerOrder(UUID orderUuid, UUID productUuid) {
         if (orderUuid == null || productUuid == null || productRepository.findByUuid(productUuid).getOrderCount() == 0)
             return false;
@@ -77,7 +77,7 @@ public class CustomerOrderService {
             return true;
         }
     }
-
+// Update customer order method.
     public boolean updateCustomerOrderEntity(UUID uuid, CustomerOrderEntity customerOrderEntity) {
         if (uuid == null || customerOrderEntity == null)
             return false;
@@ -92,7 +92,7 @@ public class CustomerOrderService {
             return true;
         }
     }
-
+//Total price is calculated.
     public void calculateTotalPrice(UUID uuid) {
         CustomerOrderEntity customerOrderEntity = customerOrderRepository.findByUuid(uuid);
         BigDecimal totalPrice = BigDecimal.ZERO;

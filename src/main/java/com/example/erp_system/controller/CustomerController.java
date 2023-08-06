@@ -19,7 +19,7 @@ public class CustomerController {
 
     @Autowired
     CustomerService customerService;
-
+// create-update-delete-get-getAll and methods are written.
     @PostMapping("create")
     public ResponseEntity<Boolean> createCustomer(@RequestBody CustomerDTO customer) {
         return new ResponseEntity<>(customerService.createCustomer(customer.getName(), customer.getSurname(), customer.getEmail(), customer.getCustomerNo()),

@@ -1,5 +1,5 @@
 package com.example.erp_system.util;
-// Status Enums are created.
+// Status Enums are created according to situation of products.
 public enum StatusEnum {
     APPROVED,
     WAITING,

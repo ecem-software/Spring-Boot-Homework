@@ -20,7 +20,7 @@ public class ProductService {
     ProductRepository productRepository;
     @Autowired
     KdvRepository kdvRepository;
-
+//product Methods are here.
     public boolean createProduct(String name, Integer stockAmount, BigDecimal productPrice, boolean isKdvApplied, KdvEntity kdv) {
         if (name == null || stockAmount == null || productPrice == null || kdv == null) {
             return false;
@@ -60,6 +60,7 @@ public class ProductService {
         return productRepository.findAllByNameContainsIgnoreCase(name);
     }
 
+    //Product is updated.
     public boolean updateProduct(UUID uuid, ProductEntity productEntity) {
         if (uuid == null || productEntity == null) {
             return false;
@@ -81,6 +82,7 @@ public class ProductService {
         }
 
     }
+    //price with kdv and without kdv is coded.
     public void isKdvCorrectPrice(ProductEntity product) {
         BigDecimal kdv = product.getKdv().getPercent();
         BigDecimal price = product.getProductPrice();
